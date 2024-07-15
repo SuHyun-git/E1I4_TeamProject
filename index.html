@@ -11,6 +11,19 @@
             crossorigin="anonymous"
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script> let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
+            fetch(url).then(res => res.json()).then(data => {
+                let temp = data['temp'];
+                $('#msg').text(temp);
+    
+                if (temp > 20) {
+                    $('#temp').text('더워요');
+                } else {
+                    $('#temp').text('추워요');
+                }
+            })</script>
+       
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&display=swap");
 
@@ -133,6 +146,8 @@
         <div class="title">
             <h1>E 1 I 4</h1>
             <p>우리팀을 소개합니다.</p>
+
+            
         </div>
         <div class="nav">
             <div class="navButton">
@@ -140,6 +155,9 @@
                 <a href="#teamIntro">팀 규칙</a>
                 <a href="#teamcard">팀원 소개</a>
                 <a href="#guest">방명록</a>
+                <a href="#temp">오늘 서울의 온도 : <span id="msg"></span></a>
+                
+                
             </div>
         </div>
         <div class="intro">
@@ -159,6 +177,7 @@
                 <p>4. ㅇㅇㅇㅇㅇㅇ</p>
                 <p>5. ㅇㅇㅇㅇㅇㅇ</p>
             </div>
+            
         </div>
         <div class="mycards" id="teamcard">
             <div class="row row-cols-1 row-cols-md-5 g-4">
