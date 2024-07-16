@@ -121,41 +121,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        $('#open-edit').click(async function () {
-            $('#edit-box').toggle();
-        })
 
-        $('#back').click(async function () {
-            history.back(1);
-        })
-
-        $('#edit').on('click', async function () {
-            let image = $('#image').val();
-            let blog = $('#blog').val();
-            let name = $('#name').val();
-            let nameText = $('#nameText').val();
-            let MBTI = $('#MBTI').val();
-            let strengths = $('#strengths').val();
-            let style = $('#style').val();
-            let goal = $('#goal').val();
-
-            const docRef = doc(db, "team", "park");
-            const docSnap = await getDoc(docRef);
-            const data = docSnap.data();
-
-            await updateDoc(doc(db, "team", "park"), {
-                'image': image,
-                'blog': blog,
-                'name': name,
-                'nameText': nameText,
-                'MBTI': MBTI,
-                'strengths': strengths,
-                'style': style,
-                'goal': goal
-            });
-            alert('수정이 완료되었습니다.');
-            window.location.reload();
-        });
 
         const teamDoc = await getDoc(doc(db, "team", "park"));
         const row = teamDoc.data();
@@ -205,6 +171,80 @@
             </details>
         </div>`;
         $('#profile').append(profile);
+
+        let editBox = `
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="image" placeholder="앨범 이미지" value="${image}">
+            <label for="floatingInput">앨범 이미지</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="blog" placeholder="블로그 주소" value="${blog}">
+            <label for="floatingInput">블로그 주소</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="name" placeholder="이름" value="${name}">
+            <label for="floatingInput">이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="nameText" placeholder="한마디" value="${nameText}">
+            <label for="floatingInput">한마디</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="MBTI" placeholder="MBTI" value="${MBTI}">
+            <label for="floatingInput">MBTI</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="strengths" placeholder="장점" value="${strengths}">
+            <label for="floatingInput">장점</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="style" placeholder="style" value="${style}">
+            <label for="floatingInput">style</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="goal" placeholder="특징, 추구하는 궁극적 목표" value="${goal}">
+            <label for="floatingInput">특징, 추구하는 궁극적 목표</label>
+        </div>
+        <div class="mybtn">
+            <button id="edit" type="button" class="btn btn-primary">수정하기</button>
+        </div>`;
+        $('#editBox').append(editBox);
+
+        $('#edit').on('click', async function () {
+            let image = $('#image').val();
+            let blog = $('#blog').val();
+            let name = $('#name').val();
+            let nameText = $('#nameText').val();
+            let MBTI = $('#MBTI').val();
+            let strengths = $('#strengths').val();
+            let style = $('#style').val();
+            let goal = $('#goal').val();
+
+            const docRef = doc(db, "team", "park");
+            const docSnap = await getDoc(docRef);
+            const data = docSnap.data();
+
+            await updateDoc(doc(db, "team", "park"), {
+                'image': image,
+                'blog': blog,
+                'name': name,
+                'nameText': nameText,
+                'MBTI': MBTI,
+                'strengths': strengths,
+                'style': style,
+                'goal': goal
+            });
+            alert('수정이 완료되었습니다.');
+            window.location.reload();
+        });
+
+        $('#open-edit').click(async function () {
+            $('#editBox').toggle();
+        })
+
+        $('#back').click(async function () {
+            history.back(1);
+        })
     </script>
 </head>
 
@@ -216,42 +256,8 @@
     <div id="profile" class="profile">
         <!-- MBTI, 장점, 이름, 한마디 getDoc로 가져오기 -->
     </div>
-    <div class="edit-box" id="edit-box">
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="image" placeholder="앨범 이미지">
-            <label for="floatingInput">앨범 이미지</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="blog" placeholder="블로그 주소">
-            <label for="floatingInput">블로그 주소</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="name" placeholder="이름">
-            <label for="floatingInput">이름</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="nameText" placeholder="한마디">
-            <label for="floatingInput">한마디</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="MBTI" placeholder="MBTI">
-            <label for="floatingInput">MBTI</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="strengths" placeholder="장점">
-            <label for="floatingInput">장점</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="style" placeholder="style">
-            <label for="floatingInput">style</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="goal" placeholder="특징, 추구하는 궁극적 목표">
-            <label for="floatingInput">특징, 추구하는 궁극적 목표</label>
-        </div>
-        <div class="mybtn">
-            <button id="edit" type="button" class="btn btn-primary">수정하기</button>
-        </div>
+    <div id="editBox" class="edit-box">
+        <!-- 수정하기 getDoc로 value 넣기 -->
     </div>
     <div class="home-button">
         <button id="open-edit" type="button" class="btn btn-outline-info">수정열기</button>
