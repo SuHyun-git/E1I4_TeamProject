@@ -26,6 +26,13 @@
                         $("#temp").text("추워요");
                     }
                 });
+                $(document).ready(function () {
+let url = "http://spartacodingclub.shop/sparta_api/seoulair";
+        fetch(url).then(res => res.json()).then(data => {
+            let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM']
+            $('#msg1').text(mise)
+        })
+    })
         </script>
 
         <style>
@@ -150,6 +157,7 @@
         <div class="title">
             <h1>E 1 I 4</h1>
             <p>우리팀을 소개합니다.</p>
+            <p>현재 서울의 미세먼지 : <span id="msg1"></span></p>
         </div>
         <div class="nav">
             <div class="navButton">
