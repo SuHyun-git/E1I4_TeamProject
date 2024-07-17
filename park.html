@@ -97,6 +97,14 @@
 
             display: none;
         }
+        #edit {
+            background-color: white;
+            margin: 0px auto 0px auto;
+        }
+        .mybtn {
+            width: 90px;
+            margin: 0px auto 0px auto;
+        }
     </style>
     <script type="module">
         // Firebase SDK 라이브러리 가져오기
@@ -206,7 +214,7 @@
             <label for="floatingInput">특징, 추구하는 궁극적 목표</label>
         </div>
         <div class="mybtn">
-            <button id="edit" type="button" class="btn btn-primary">수정하기</button>
+            <button id="edit" type="button" class="btn btn-outline-info">수정하기</button>
         </div>`;
         $('#editBox').append(editBox);
 
@@ -240,11 +248,17 @@
 
         $('#open-edit').click(async function () {
             $('#editBox').toggle();
-        })
+            if($(this).text() == '수정열기') {
+                $(this).text('수정닫기');
+            }
+            else {
+                $(this).text('수정열기');
+            }
+        });
 
         $('#back').click(async function () {
             history.back(1);
-        })
+        });
     </script>
 </head>
 
