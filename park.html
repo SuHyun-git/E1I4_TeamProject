@@ -131,7 +131,7 @@
 
 
 
-        const teamDoc = await getDoc(doc(db, "team", "park"));
+        const teamDoc = await getDoc(doc(db, "team", "park"));  //firebase 폴더명 변경 필수
         const row = teamDoc.data();
         console.log(row);
 
@@ -228,11 +228,11 @@
             let style = $('#style').val();
             let goal = $('#goal').val();
 
-            const docRef = doc(db, "team", "park");
+            const docRef = doc(db, "team", "park"); //firebase 폴더명 변경 필수
             const docSnap = await getDoc(docRef);
             const data = docSnap.data();
 
-            await updateDoc(doc(db, "team", "park"), {
+            await updateDoc(doc(db, "team", "park"), {  //firebase 폴더명 변경 필수
                 'image': image,
                 'blog': blog,
                 'name': name,
