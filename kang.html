@@ -1,164 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>자기소개</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous"
-        />
 
-        <style>
-            body {
-                background-color: rgb(166, 236, 245);
-            }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자기소개</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
-            .team-card {
-                width: 50%;
-                margin: 100px auto 30px auto;
+    <style>
+        /* 팀카드 수정 */
+        .team-card {
+            width: 100%;
+            margin: 20px auto 10px auto;
+            display: flex;
+            flex-direction: row;
+            flex: 1 1;
+            align-items: center;
+            justify-content: center;
+        }
 
-                display: flex;
-                flex-direction: row;
-                flex: 1 1;
-                align-items: center;
-                justify-content: center;
-            }
+        .card {
+            width: auto;
+            background-color: rgb(244, 244, 244);
+            text-align: center;
+        }
 
-            .card {
-                width: auto;
-                border-radius: 10px;
+        .image {
+            border-radius: 50%;
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+        }
 
-                text-align: center;
-            }
+        .name-text {
+            width: 500px;
+            margin-left: 30px;
+            padding: 10px 10px 10px 10px;
+            background-color: rgb(239, 233, 224);
+            color :rgba(0, 0, 0, 0.658);
+        }
 
-            .image {
-                border-radius: 10px;
-            }
+        .profile {
+            width: 700px;
+            margin: 0px auto 0px auto;
+            padding-left: 20px;
+            background-color: rgb(239, 233, 224);
+            border: 3px solid transparent;
+        
+            color :rgba(0, 0, 0, 0.658);
+        }
 
-            .name-text {
-                width: 300px;
-                margin-left: 30px;
-                padding: 10px 10px 10px 10px;
-                border-radius: 10px;
-                background-color: white;
-            }
+        .profile-text {
+            width: 650px;
+            margin: 0px auto 0px auto;
+            background-color: rgb(239, 233, 224);
+            display: flex;
+            flex-direction: row;
+            flex: 1 1;
+            color :rgba(0, 0, 0, 0.658);
+        }
 
-            .profile {
-                width: 700px;
-                margin: 0px auto 0px auto;
-                padding-left: 20px;
+        #profile-toggle {
+            width: 100%;
+            text-align: left;
+            border: 0;
+            background-color: transparent;
+        }
 
-                background-color: white;
+        .home-button {
+            margin-top: 30px;
 
-                border: 3px solid transparent;
-                border-radius: 10px;
-            }
+            /* 내용물을 정렬 */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
 
-            .profile-text {
-                width: 650px;
-                margin: 0px auto 0px auto;
-            }
+        .home-button>* {
+            background-color: white;
+        }
 
-            #profile-toggle {
-                width: 100%;
-                text-align: left;
-                border: 0;
-                background-color: transparent;
-            }
+        details[open]>p {
+            margin-left: 30px;
+        }
 
-            .home-button {
-                margin-top: 30px;
+        .edit-box {
+            width: 500px;
+            margin: 50px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px blue;
+            border-radius: 5px;
 
-                /* 내용물을 정렬 */
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-            }
+            display: none;
+        }
 
-            .home-button > * {
-                background-color: white;
-            }
+        #edit {
+            background-color: white;
+            margin: 0px auto 0px auto;
+        }
 
-            details[open] > p {
-                margin-left: 30px;
-            }
+        .mybtn {
+            width: 90px;
+            margin: 0px auto 0px auto;
+        }
 
-            .edit-box {
-                width: 500px;
-                margin: 50px auto 0px auto;
-                padding: 20px;
-                box-shadow: 0px 0px 3px 0px blue;
-                border-radius: 5px;
 
-                display: none;
-            }
-            #edit {
-                background-color: white;
-                margin: 0px auto 0px auto;
-            }
-            .mybtn {
-                width: 90px;
-                margin: 0px auto 0px auto;
-            }
-        </style>
-        <script type="module">
-            // Firebase SDK 라이브러리 가져오기
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-            import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        /* 색들어간 배경 줄이기 */
+        .main-back {
 
-            // Firebase 구성 정보 설정
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            const firebaseConfig = {
-                apiKey: "AIzaSyC9GpKVaL71VqXmN5OCRpiV0I81x_Jxxqo",
-                authDomain: "e1i4-780e3.firebaseapp.com",
-                projectId: "e1i4-780e3",
-                storageBucket: "e1i4-780e3.appspot.com",
-                messagingSenderId: "496930046189",
-                appId: "1:496930046189:web:c276eecd3c482417d04ce4",
-                measurementId: "G-CNNH89HWYH",
-            };
+            height: auto;
+            width: 800px;
+            margin: 100px auto 0 auto;
+            justify-content: center;
+            border-radius: 5px;
+        }
 
-            // Firebase 인스턴스 초기화
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
+        /* 카드 모으기 */
+        .main-content {
+            background-color: rgb(239, 233, 224);
+            padding-bottom: 30px;
+            border-radius: 5px;
+            margin: auto 10px auto 10px;
+        }
+        a {
+            text-decoration: none;
+            color :rgba(0, 0, 0, 0.534);
+        }
+    </style>
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-            const teamDoc = await getDoc(doc(db, "team", "kang")); //firebase 폴더명 변경 필수
-            const row = teamDoc.data();
-            console.log(row);
+        // Firebase 구성 정보 설정
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyC9GpKVaL71VqXmN5OCRpiV0I81x_Jxxqo",
+            authDomain: "e1i4-780e3.firebaseapp.com",
+            projectId: "e1i4-780e3",
+            storageBucket: "e1i4-780e3.appspot.com",
+            messagingSenderId: "496930046189",
+            appId: "1:496930046189:web:c276eecd3c482417d04ce4",
+            measurementId: "G-CNNH89HWYH",
+        };
 
-            let image = row["image"];
-            let blog = row["blog"];
-            let name = row["name"];
-            let nameText = row["nameText"];
-            let MBTI = row["MBTI"];
-            let strengths = row["strengths"];
-            let style = row["style"];
-            let goal = row["goal"];
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-            let top = `
-                <div class="card">
+        const teamDoc = await getDoc(doc(db, "team", "kang")); //firebase 폴더명 변경 필수
+        const row = teamDoc.data();
+        console.log(row);
+
+        let image = row["image"];
+        let blog = row["blog"];
+        let name = row["name"];
+        let nameText = row["nameText"];
+        let MBTI = row["MBTI"];
+        let strengths = row["strengths"];
+        let style = row["style"];
+        let goal = row["goal"];
+        // 네임텍스트에 스타일 추가
+        let top = `
+        
+                <div>
                     <img src="${image}"
                     class="image" alt="..." />
-                    <div class="card-body">
-                        <a href="${blog}">${blog}</a>
+                        
                     </div>
                 </div>
                 <div class="name-text">
-                    <h1>${name}</h1>
-                    <p>${nameText}</p>
-                </div>`;
-            $("#teamCard").append(top);
 
-            let profile = `
-        <h1>Profile</h1>
+                    <h3>${name}</h3>
+                    <p></p>
+                    <a href="${blog}">${blog}</a>
+                    <p>${nameText}</p>
+                    
+                </div>
+                `;
+        $("#teamCard").append(top);
+
+        let profile = `
+        <h3>Profile</h3>
         <div class="profile-text">
+            <div style="width:200px">
             <details>
                 <summary>MBTI</summary>
                 <p>${MBTI}</p>
@@ -167,6 +197,8 @@
                 <summary>장점</summary>
                 <p>${strengths}</p>
             </details>
+            </div>
+            <div style="width:500px">
             <details>
                 <summary>style</summary>
                 <p>${style}</p>
@@ -175,10 +207,11 @@
                 <summary>특징, 추구하는 궁극적 목표</summary>
                 <p>${goal}</p>
             </details>
+            </div>
         </div>`;
-            $("#profile").append(profile);
+        $("#profile").append(profile);
 
-            let editBox = `
+        let editBox = `
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="image" placeholder="앨범 이미지" value="${image}">
             <label for="floatingInput">앨범 이미지</label>
@@ -212,68 +245,80 @@
             <label for="floatingInput">특징, 추구하는 궁극적 목표</label>
         </div>
         <div class="mybtn">
-            <button id="edit" type="button" class="btn btn-outline-info">수정하기</button>
+            <button id="edit" type="button" class="btn btn-outline-info" style="color:black">수정완료</button>
         </div>`;
-            $("#editBox").append(editBox);
+        $("#editBox").append(editBox);
 
-            $("#edit").on("click", async function () {
-                let image = $("#image").val();
-                let blog = $("#blog").val();
-                let name = $("#name").val();
-                let nameText = $("#nameText").val();
-                let MBTI = $("#MBTI").val();
-                let strengths = $("#strengths").val();
-                let style = $("#style").val();
-                let goal = $("#goal").val();
+        $("#edit").on("click", async function () {
+            let image = $("#image").val();
+            let blog = $("#blog").val();
+            let name = $("#name").val();
+            let nameText = $("#nameText").val();
+            let MBTI = $("#MBTI").val();
+            let strengths = $("#strengths").val();
+            let style = $("#style").val();
+            let goal = $("#goal").val();
 
-                const docRef = doc(db, "team", "kang"); //firebase 폴더명 변경 필수
-                const docSnap = await getDoc(docRef);
-                const data = docSnap.data();
+            const docRef = doc(db, "team", "kang"); //firebase 폴더명 변경 필수
+            const docSnap = await getDoc(docRef);
+            const data = docSnap.data();
 
-                await updateDoc(doc(db, "team", "kang"), {
-                    //firebase 폴더명 변경 필수
-                    image: image,
-                    blog: blog,
-                    name: name,
-                    nameText: nameText,
-                    MBTI: MBTI,
-                    strengths: strengths,
-                    style: style,
-                    goal: goal,
-                });
-                alert("수정이 완료되었습니다.");
-                window.location.reload();
+            await updateDoc(doc(db, "team", "kang"), {
+                //firebase 폴더명 변경 필수
+                image: image,
+                blog: blog,
+                name: name,
+                nameText: nameText,
+                MBTI: MBTI,
+                strengths: strengths,
+                style: style,
+                goal: goal,
             });
+            alert("수정이 완료되었습니다.");
+            window.location.reload();
+        });
 
-            $("#open-edit").click(async function () {
-                $("#editBox").toggle();
-                if ($(this).text() == "수정열기") {
-                    $(this).text("수정닫기");
-                } else {
-                    $(this).text("수정열기");
-                }
-            });
+        $("#open-edit").click(async function () {
+            $("#editBox").toggle();
+            if ($(this).text() == "수정하기") {
+                $(this).text("수정닫기");
+            } else {
+                $(this).text("수정하기");
+            }
+        });
 
-            $("#back").click(async function () {
-                history.back(1);
-            });
-        </script>
-    </head>
+        $("#back").click(async function () {
+            history.back(1);
+        });
+    </script>
+</head>
 
-    <body>
-        <div class="title"></div>
-        <div id="teamCard" class="team-card">
-            <!-- 이미지, 블로그, 이름, 한마디 getDoc로 가져오기 -->
+<body>
+    <div class="main-back">
+        <!-- 카드 3개 한곳에 모아서 크기 맞추기 -->
+        <div class="main-content">
+            <div class="title"></div>
+            <div id="teamCard" class="team-card">
+                <!-- 이미지, 블로그, 이름, 한마디 getDoc로 가져오기 -->
+            </div>
+            <div id="profile" class="profile">
+                <!-- MBTI, 장점, 이름, 한마디 getDoc로 가져오기 -->
+            </div>
         </div>
-        <div id="profile" class="profile">
-            <!-- MBTI, 장점, 이름, 한마디 getDoc로 가져오기 -->
-        </div>
-        <div id="editBox" class="edit-box">
-            <!-- 수정하기 getDoc로 value 넣기 -->
-        </div>
-        <div class="home-button">
-            <button id="open-edit" type="button" class="btn btn-outline-info">수정열기</button>
-            <button id="back" type="button" class="btn btn-outline-info">뒤로가기</button>
-        </div>
-    </body>
+            <div id="editBox" class="edit-box">
+                <!-- 수정하기 getDoc로 value 넣기 -->
+            </div>
+        
+    </div>
+
+    <div class="home-button">
+        <!-- 버튼 사이 공간 띄우고 검은색 글씨 -->
+        <button id="open-edit" type="button" class="btn btn-outline-info"
+            style="color:black; margin:10px; ">수정하기</button>
+        <button id="back" type="button" class="btn btn-outline-info" style="color:black;  margin:10px;">뒤로가기</button>
+    </div>
+
+
+</body>
+
 </html>
