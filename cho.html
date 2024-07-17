@@ -167,22 +167,12 @@
         let goal = row["goal"];
         // 네임텍스트에 스타일 추가
         let top = `
-        
                 <div>
-                    <img src="${image}"
-                    class="image" alt="..." />
-                        
-                    </div>
-                </div>
-                <div class="name-text">
-
                     <h3>${name}</h3>
                     <p></p>
                     <a href="${blog}">${blog}</a>
                     <p>${nameText}</p>
-                    
-                </div>
-                `;
+                </div>`;
         $("#teamCard").append(top);
 
         let profile = `
@@ -194,17 +184,17 @@
                 <p>${MBTI}</p>
             </details>
             <details>
-                <summary>장점</summary>
+                <summary>객관적으로 살펴본 자신의 장점</summary>
                 <p>${strengths}</p>
             </details>
             </div>
             <div style="width:500px">
             <details>
-                <summary>style</summary>
+                <summary>자신의 스타일, 협업 스타일</summary>
                 <p>${style}</p>
             </details>
             <details>
-                <summary>특징, 추구하는 궁극적 목표</summary>
+                <summary>추구하는 궁극적 목표</summary>
                 <p>${goal}</p>
             </details>
             </div>
@@ -225,28 +215,29 @@
             <label for="floatingInput">이름</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="nameText" placeholder="한마디" value="${nameText}">
-            <label for="floatingInput">한마디</label>
+            <input type="email" class="form-control" id="nameText" placeholder="TMI" value="${nameText}">
+            <label for="floatingInput">TMI</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="MBTI" placeholder="MBTI" value="${MBTI}">
             <label for="floatingInput">MBTI</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="strengths" placeholder="장점" value="${strengths}">
-            <label for="floatingInput">장점</label>
+            <input type="email" class="form-control" id="strengths" placeholder="객관적으로 살펴본 자신의 장점" value="${strengths}">
+            <label for="floatingInput">객관적으로 살펴본 자신의 장점</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="style" placeholder="style" value="${style}">
-            <label for="floatingInput">style</label>
+            <input type="email" class="form-control" id="style" placeholder="자신의 스타일, 협업 스타일" value="${style}">
+            <label for="floatingInput">자신의 스타일, 협업 스타일</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="goal" placeholder="특징, 추구하는 궁극적 목표" value="${goal}">
-            <label for="floatingInput">특징, 추구하는 궁극적 목표</label>
+            <input type="email" class="form-control" id="goal" placeholder="추구하는 궁극적인 목표" value="${goal}">
+            <label for="floatingInput">추구하는 궁극적인 목표</label>
         </div>
         <div class="mybtn">
             <button id="edit" type="button" class="btn btn-outline-info" style="color:black">수정완료</button>
         </div>`;
+
         $("#editBox").append(editBox);
 
         $("#edit").on("click", async function () {
@@ -317,8 +308,6 @@
             style="color:black; margin:10px; ">수정하기</button>
         <button id="back" type="button" class="btn btn-outline-info" style="color:black;  margin:10px;">뒤로가기</button>
     </div>
-
-
 </body>
 
 </html>
