@@ -36,16 +36,34 @@
 
         .name-text {
             width: 500px;
-            margin-left: 30px;
-            padding: 10px 10px 10px 10px;
+            margin: 50px 0px 0px 30px;
             background-color: rgb(239, 233, 224);
             color: rgba(0, 0, 0, 0.658);
+        }
+        .name{
+            font-size: 35px;
+            font-weight: blod;
+        }
+        .nameMBTI {
+            display: flex;
+            flex-direction: row;
+            flex: 1 1;
+            font-weight : bold;
+        }
+        .mbti {
+            height: 25px;
+            margin: 20px 0px 0px 10px;
+            padding: 0px 5px 5px 5px;
+            background-color: rgba(128, 0, 128, 0.5); /* mbti 색상 변경 */
+            color: white;
+
+            border-radius: 5px;
         }
 
         .profile {
             width: 700px;
             margin: 0px auto 0px auto;
-            padding-left: 20px;
+            padding-left: 10px;
             background-color: rgb(239, 233, 224);
             border: 3px solid transparent;
 
@@ -58,7 +76,7 @@
             background-color: rgb(239, 233, 224);
             display: flex;
             flex-direction: row;
-            flex: 1 1;
+            flex-wrap: wrap;
             color: rgba(0, 0, 0, 0.658);
         }
 
@@ -82,17 +100,27 @@
         .home-button>* {
             background-color: white;
         }
+        summary{
+            font-weight: bold;
+            width: 320px;
+            font-size: 18px;
+        }
 
-        details[open]>p {
-            margin-left: 30px;
+        details[open] > p {
+            width: 290px;
+            background-color: rgb(229, 223, 214);
+            margin: 5px 0px 5px 20px;
+            padding: 10px 10px 10px 10px;
+            border-radius: 5px;
         }
 
         .edit-box {
             width: 500px;
-            margin: 50px auto 0px auto;
+            margin: 20px auto 0px auto;
             padding: 20px;
-            box-shadow: 0px 0px 3px 0px blue;
+            box-shadow: 0px 0px 5px 0px rgb(239, 233, 224);
             border-radius: 5px;
+            background-color: rgb(239, 233, 224);
 
             display: none;
         }
@@ -168,6 +196,7 @@
         let goal = row["goal"];
         // 네임텍스트에 스타일 추가
         let top = `
+        
                 <div>
                     <img src="${image}"
                     class="image" alt="..." />
@@ -175,28 +204,26 @@
                     </div>
                 </div>
                 <div class="name-text">
-                    <h3>${name}</h3>
+
+                    <div class="nameMBTI">
+                    <p class="name">${name}</p>
+                    <p class="mbti">${MBTI}</p>
+                    </div>
                     <p></p>
                     <a href="${blog}">${blog}</a>
                     <p>${nameText}</p>
-                                 </div>
+                    
+                </div>
                 `;
         $("#teamCard").append(top);
 
         let profile = `
         <h3>Profile</h3>
         <div class="profile-text">
-            <div style="width:200px">
-            <details>
-                <summary>MBTI</summary>
-                <p>${MBTI}</p>
-            </details>
             <details>
                 <summary>객관적으로 살펴본 자신의 장점</summary>
                 <p>${strengths}</p>
             </details>
-            </div>
-            <div style="width:500px">
             <details>
                 <summary>자신의 스타일, 협업 스타일</summary>
                 <p>${style}</p>
@@ -205,8 +232,8 @@
                 <summary>추구하는 궁극적 목표</summary>
                 <p>${goal}</p>
             </details>
-            </div>
         </div>`;
+
         $("#profile").append(profile);
 
         let editBox = `
